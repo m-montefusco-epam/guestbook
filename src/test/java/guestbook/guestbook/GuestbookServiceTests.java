@@ -5,6 +5,7 @@ import guestbook.guestbook.auths.AccountRepository;
 import guestbook.guestbook.domains.GuestbookPost;
 import guestbook.guestbook.repositories.GuestbookPostRepository;
 import guestbook.guestbook.services.GuestBookServiceImpl;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,7 +56,7 @@ class GuestbookServiceTests {
 		setup();
 		MockMultipartFile multipartFile = createMockMultipartFile();
 		GuestbookPost result = guestBookService.createGuestbookPost(multipartFile, text, accountName);
-		Assertions.assertArrayEquals(multipartFile.getBytes(), result.getImageContent());
+		Assertions.assertArrayEquals(Base64.encodeBase64(multipartFile.getBytes()), result.getImageContent());
 		Assertions.assertEquals(text,result.getPostText());
 		Assertions.assertEquals(mpOrigFileName,result.getPostImageLabel());
 		Assertions.assertEquals(9L,result.getSize());
@@ -166,7 +167,7 @@ class GuestbookServiceTests {
 		Optional<GuestbookPost> optResult = guestBookService.findGuestbookPostById(guestPostId);
 		Assertions.assertTrue(optResult.isPresent());
 		GuestbookPost result = optResult.get();
-		Assertions.assertArrayEquals(multipartFile2.getBytes(), result.getImageContent());
+		Assertions.assertArrayEquals(Base64.encodeBase64(multipartFile2.getBytes()), result.getImageContent());
 		Assertions.assertEquals("Hey Judeeeeeee!!!!",result.getPostText());
 		Assertions.assertEquals("hellpwrold.jpg",result.getPostImageLabel());
 		Assertions.assertEquals(9L,result.getSize());
