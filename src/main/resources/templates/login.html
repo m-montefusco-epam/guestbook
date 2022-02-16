@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+    </head>
+    <body>
+        <h3>Guestbook Account Login</h3>
+        <p th:if="${loginError}" class="error">Wrong user or password</p>
+        <form th:action="@{/login}" method="post">
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    Invalid username or password.
+                </div>
+            </div>
+            <label >Username</label>:
+            <input type="text" id="name" name="username" placeholder="Account Name" autofocus="autofocus" /> <br />
+            <label for="password">Password</label>:
+            <input type="password" id="password" name="password"  placeholder="Password" autofocus="autofocus" /> <br />
+            <input type="submit" value="Log in" />
+        </form>
+    </body>
+</html>
