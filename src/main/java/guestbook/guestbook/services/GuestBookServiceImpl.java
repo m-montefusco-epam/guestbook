@@ -89,7 +89,8 @@ public class GuestBookServiceImpl implements GuestBookService{
         Optional<GuestbookPost> guestbookPost = guestbookPostRepository.findById(idPost);
         if(guestbookPost.isPresent()) {
             GuestbookPost guestbook = guestbookPost.get();
-            if(image != null && image.getBytes() != null) {
+            if(image != null) {
+                image.getBytes();
                 guestbook.setPostImageLabel(image.getOriginalFilename());
                 guestbook.setImageContent(Base64.encodeBase64(image.getBytes()));
                 guestbook.setSize(image.getSize());

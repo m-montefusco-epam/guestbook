@@ -68,8 +68,7 @@ class GuestbookServiceTests {
 		cleanTables();
 		setup();
 		guestBookService.createGuestbookPost(createMockMultipartFile(), text, accountName);
-		List<GuestbookPost> posts = new ArrayList<>();
-		posts.add(createGBPost());
+
 		List<GuestbookPost> results = guestBookService.getAllGuestbookPost();
 		Assertions.assertEquals(1, results.size());
 	}
@@ -172,10 +171,6 @@ class GuestbookServiceTests {
 		Assertions.assertEquals("hellpwrold.jpg",result.getPostImageLabel());
 		Assertions.assertEquals(9L,result.getSize());
 		Assertions.assertEquals(false,result.getApprovedFlag());
-	}
-
-	private GuestbookPost createGBPost() {
-		return createGBPostWithAccount(createAccount());
 	}
 
 	private GuestbookPost createGBPostWithAccount(Account account) {
